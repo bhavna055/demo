@@ -34,11 +34,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{department}")
-    public ResponseEntity<employee> getEmployeeByDepartment(@PathVariable(value = "department") String departmentt)
+    public ResponseEntity<List<employee>> getEmployeeByDepartment(@PathVariable(value = "department") String department)
             throws ResourceNotFoundException {
-        employee employee = employeeRepository.findByDepartment(departmentt)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + departmentt));
-        return ResponseEntity.ok().body(employee);
+        List<employee> employees = employeeRepository.findByDepartment(department);
+        if (employees.isEmpty()){
+            throw  new ResourceNotFoundException("No employee found for department " + department);
+        }
+
+        return ResponseEntity.ok().body(employees);
     }
 
 
