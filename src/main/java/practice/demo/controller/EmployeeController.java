@@ -21,24 +21,25 @@ public class EmployeeController {
         return employeeRepository.save(Employee);
     }
 
+//    @GetMapping("/employees/{department}")
+//    public ResponseEntity<employee> getEmployeeById(@PathVariable(value = "department") String departmentt)
+//            throws ResourceNotFoundException {
+//        employee employee = employeeRepository.findByDepartment(departmentt)
+//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + departmentt));
+//        return ResponseEntity.ok().body(employee);
+//    }
+    @GetMapping("/employees")
+    public List<employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
     @GetMapping("/employees/{department}")
-    public ResponseEntity<employee> getEmployeeById(@PathVariable(value = "department") String departmentt)
+    public ResponseEntity<employee> getEmployeeByDepartment(@PathVariable(value = "department") String departmentt)
             throws ResourceNotFoundException {
         employee employee = employeeRepository.findByDepartment(departmentt)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + departmentt));
         return ResponseEntity.ok().body(employee);
     }
-    @GetMapping("/employees")
-    public List<employee> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
-//    @GetMapping("/employees/{id}")
-//    public ResponseEntity<employee> getEmployeeById(@PathVariable(value = "id") Long employeeId)
-//            throws ResourceNotFoundException {
-//        employee employee = employeeRepository.findById(employeeId)
-//                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-//        return ResponseEntity.ok().body(employee);
-//    }
 
 
 }
