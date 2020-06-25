@@ -1,7 +1,6 @@
 package practice.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import practice.demo.exception.ResourceNotFoundException;
 import practice.demo.model.employee;
@@ -34,12 +33,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{department}")
-    public ResponseEntity<employee> getEmployeeByDepartment(@PathVariable(value = "department") String departmentt)
+    public employee getEmployeeByDepartment(@PathVariable(value = "department") String departmentt)
             throws ResourceNotFoundException {
         employee employee = employeeRepository.findByDepartment(departmentt)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + departmentt));
-        return ResponseEntity.ok().body(employee);
+        return employee;
+
+
     }
+
+
+
 
 
 }
