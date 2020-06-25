@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table
 
-public class employee {
+public class Employee {
 
     private long id;
 
@@ -15,9 +15,9 @@ public class employee {
     private String department;
 
     private String role;
-    public employee() {}
+    public Employee() {}
 
-    public employee(String empame, String department, String role) {
+    public Employee(String empame, String department, String role) {
 
         this.empName = empName;
         this.department = department;
